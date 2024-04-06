@@ -7,7 +7,7 @@ import mongoose from 'mongoose'
 import { userRouter } from './routes/user.routes.js';
 import { categoryRouter } from './routes/category.routes.js';
 import { uploadRouter } from './routes/upload.routes.js';
-
+import { productRouter } from './routes/product.routes.js'
 
 dotenv.config()
 
@@ -23,6 +23,7 @@ app.use(fileUpload({
 app.use('/user', userRouter)
 app.use('/api', categoryRouter)
 app.use('/api', uploadRouter)
+app.use('/api', productRouter)
 
 //conexion 
 const URI = process.env.MONGO_URL
