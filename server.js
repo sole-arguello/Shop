@@ -4,6 +4,10 @@ import cors from 'cors'
 import fileUpload from 'express-fileupload'
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
+import { userRouter } from './routes/user.routes.js';
+import { categoryRouter } from './routes/category.routes.js';
+import { uploadRouter } from './routes/upload.routes.js';
+
 
 dotenv.config()
 
@@ -14,6 +18,11 @@ app.use(cookieParser())
 app.use(fileUpload({
     useTempFiles: true
 }))
+
+//rutas
+app.use('/user', userRouter)
+app.use('/api', categoryRouter)
+app.use('/api', uploadRouter)
 
 //conexion 
 const URI = process.env.MONGO_URL
@@ -27,7 +36,7 @@ mongoose.connect(URI)
 })
 
 app.get('/', (req, res) => {
-    res.send('Hello World')
+    res.json({msg: 'Hello World'})
 })
 
 const PORT = process.env.PORT || 5000
