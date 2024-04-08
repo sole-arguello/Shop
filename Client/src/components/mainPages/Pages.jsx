@@ -5,7 +5,8 @@ import Products from "./products/Products"
 import Login from "./auth/Login"
 import Register from "./auth/Register"
 import Cart from "./cart/Cart"
-import NotFoud from "./utils/not_found/NotFoud"
+import NotFound from "./utils/NotFound"
+import DetailProduct from './products/detailProduct/DetailProduct';
 function Pages() {
   return (
     
@@ -15,7 +16,9 @@ function Pages() {
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
     <Route path="/cart" element={<Cart />} />
-    <Route path="*" element={<NotFoud />} />
+    <Route path="/detail/:id" element={<DetailProduct />} />
+
+    <Route path="*" element={<NotFound />} />
   </Routes>
       
     
