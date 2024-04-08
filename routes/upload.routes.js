@@ -15,7 +15,7 @@ cloudinary.config({
 
    
 const router = Router();
-
+//llevan autorizcion y admin
 router.post('/upload',auth, authAdmin, (req, res) => {
     try {
         //console.log(req.files)
