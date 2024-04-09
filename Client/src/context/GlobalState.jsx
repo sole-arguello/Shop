@@ -6,13 +6,18 @@ import axios from 'axios';
 export const DataProvider = ({ children }) => {
     const [token, setToken] = useState(false)
     const refreshToken = async () => {
-        const token = await axios.get('/api/user/refresh_token')
-        console.log('token', token)
+        const res = await axios.get('/api/user/refresh_token')
+        //console.log('token', token)
+        setToken(res.data.accessToken)
+    //     setTimeout(() => {
+    //         refreshToken()
+    //     }, 10 * 60 * 1000)
     }
 
     useEffect(() => {
-        refreshToken()
-
+        const firstLogin = localStorage.getItem('firstLogin')
+        console.log('firstLogin', firstLogin)
+        if(firstLogin) refreshToken()
     }, [])
 
     ProductAPI()
