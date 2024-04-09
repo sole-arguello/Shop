@@ -6,31 +6,25 @@ function UserAPI(token) {
     const [isAdmin, setIsAdmin] = useState(false)
 
     useEffect(() => {
-        //const firstLogin = localStorage.getItem('firstLogin')
+       
         if(token) {
-            // setIsLogged(true)
-            // const admin = localStorage.getItem('isAdmin')
-            // setIsAdmin(admin)
             const getUser = async () => {
                 try {
-                    const res = await axios.get('/user/infor', {
+                    const res = await axios.get('/api/user/infor', {
                         headers: { Authorization: token }
                     })
-                    console.log('res', res)
+                    //console.log('res', res)
+                    setIsLogged(true)
+                    res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
                 } catch (error) {
-                    alert(error.response.data.msg)
+                    alert("User Api "+error.response.data.msg)
                 }
-                // const res = await axios.get('/user/infor', {
-                //     headers: { Authorization: token }
-                // })
-                // setIsLogged(true)
-                // setIsAdmin(res.data.isAdmin)
             }
             getUser()
         }
     }, [token])
   return (
-    {isLogged: [isLogged, setIsLogged], isAdmin: [isAdmin, setIsAdmin]}
+    {isLogged, isAdmin, setIsLogged, setIsAdmin}
   )
 }
 
