@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UserController } from "../controlles/user.controller.js";
-import { auth } from "../middlewares/auth.js";
+import { auth, authAdmin } from "../middlewares/auth.js";
 
 const router = Router();
 
@@ -8,7 +8,7 @@ const router = Router();
 router.post('/register', UserController.register);
 
 //localhost:5000/user/login
-router.post('/login', UserController.login );
+router.post('/login',auth, authAdmin, UserController.login );
 
 //localhost:5000/user/logout
 router.get('/logout', UserController.logout );
