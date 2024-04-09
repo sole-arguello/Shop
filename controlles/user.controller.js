@@ -47,7 +47,7 @@ export class UserController {
             const refreshToken = createRefreshToken({id: user._id})
             res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,
-                path: '/user/refresh_token'
+                path: '/api/user/refresh_token'
             })
             return res.status(200).json({message: 'Login success', accessToken });
         } catch (error) {
@@ -57,7 +57,7 @@ export class UserController {
 
     static logout = async(req, res) => {
         try {
-            res.clearCookie('refreshToken', { path: '/user/refresh_token' });
+            res.clearCookie('refreshToken', { path: '/api/user/refresh_token' });
             return res.status(200).json({message: 'Logged out'})
         } catch (error) {
             return res.status(500).json({ message: error.message });
