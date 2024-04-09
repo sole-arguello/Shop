@@ -16,10 +16,16 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('info', userInfo);
+    //console.log('info', userInfo);
     try {
-      const response = await axios.post('/api/login', {...userInfo});
+      const response = await axios.post('/user/login', {...userInfo});
       console.log('response', response, "user", userInfo);
+
+      if (response.data.accessToken) {
+        localStorage.setItem('accessToken', response.data.accessToken);
+        window.location.href = '/';
+      }
+
     } catch (error) {
       console.log('error', error);
       alert(error.response.data.message);

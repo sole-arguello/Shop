@@ -17,6 +17,8 @@ router.get('/logout', UserController.logout );
 router.post('/refresh_token', UserController.refreshToken );
 
 //localhost:5000/user/infor
-router.get('/infor', auth, UserController.getUser );
+router.get('/infor', auth, UserController.getUser );//perfil
 
 export { router as userRouter }
+
+
