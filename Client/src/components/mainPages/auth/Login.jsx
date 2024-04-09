@@ -30,7 +30,7 @@ function Login() {
 
     } catch (error) {
       console.log('error', error);
-      alert(error.response.data.message);
+      alert("Loguin  "+error.response.data.msg);
     }
 
   }
