@@ -18,9 +18,10 @@ function Register() {
     e.preventDefault();
     //console.log('info', userInfo);
     try {
-      const response = await axios.post("/api/user/register", { ...userInfo });
+      await axios.post("/api/user/register", { ...userInfo });
       //console.log('response', response, "user", userInfo);
-      localStorage.setItem("firstLogin", response.data.Token);
+      //localStorage.setItem("firstLogin", response.data.accessToken);
+      localStorage.setItem("firstLogin", true);
       window.location.href = "/";
       // if (response.data.accessToken) {
       //   localStorage.setItem('accessToken', response.data.Token);
