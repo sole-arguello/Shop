@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './Login.css'
 
 function Login() {
  
@@ -20,11 +21,12 @@ function Login() {
     try {
       const response = await axios.post('/api/user/login', {...userInfo});
       //console.log('response', response, "user", userInfo);
-
-      if (response.data.accessToken) {
-        localStorage.setItem('accessToken', response.data.Token);
-        window.location.href = '/';
-      }
+      localStorage.setItem('firstLogin', response.data.Token);
+      window.location.href = '/';
+      // if (response.data.accessToken) {
+      //   localStorage.setItem('accessToken', response.data.Token);
+      //   window.location.href = '/';
+      // }
 
     } catch (error) {
       console.log('error', error);
@@ -35,6 +37,7 @@ function Login() {
   return (
     <div className='login-page' onSubmit={handleSubmit}>
       <form >
+        <h2>Login</h2>
         <input type="email" name='email' required placeholder='Email'
         value={userInfo.email} onChange={handleChangeInput}/>
 
