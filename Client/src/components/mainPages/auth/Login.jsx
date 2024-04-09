@@ -18,11 +18,11 @@ function Login() {
     e.preventDefault();
     //console.log('info', userInfo);
     try {
-      const response = await axios.post('/user/login', {...userInfo});
-      console.log('response', response, "user", userInfo);
+      const response = await axios.post('/api/user/login', {...userInfo});
+      //console.log('response', response, "user", userInfo);
 
       if (response.data.accessToken) {
-        localStorage.setItem('accessToken', response.data.accessToken);
+        localStorage.setItem('accessToken', response.data.Token);
         window.location.href = '/';
       }
 
