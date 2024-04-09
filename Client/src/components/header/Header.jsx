@@ -6,7 +6,8 @@ import Close from "./icons/close.svg"//fontawesome icons
 import '../header/header.css'
 import { Link } from "react-router-dom"
 function Header() {
-    const value = useContext(GlobalContext)
+    const state = useContext(GlobalContext)
+    console.log('state', state)
   return (
     <header>
         <div className="menu">
