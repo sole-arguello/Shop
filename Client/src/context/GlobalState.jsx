@@ -1,9 +1,19 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import ProductAPI from '../api/ProductAPI';
 export const GlobalContext = createContext();
+import axios from 'axios';
 
 export const DataProvider = ({ children }) => {
     const [token, setToken] = useState(false)
+    const refreshToken = async () => {
+        const token = await axios.get('/api/user/refresh_token')
+        console.log('token', token)
+    }
+
+    useEffect(() => {
+        refreshToken()
+
+    }, [])
 
     ProductAPI()
 
