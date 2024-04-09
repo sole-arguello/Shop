@@ -14,7 +14,7 @@ router.post('/login', UserController.login );
 router.get('/logout', UserController.logout );
 
 //localhost:5000/refresh_token
-router.post('/refresh_token', UserController.refreshToken );
+router.get('/refresh_token', UserController.refreshToken );
 
 //localhost:5000/user/infor
 router.get('/infor', auth, UserController.getUser );//perfil
