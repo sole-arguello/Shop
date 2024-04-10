@@ -8,10 +8,12 @@ import { Link } from "react-router-dom"
 import axios from 'axios'
 function Header() {
     const state = useContext(GlobalContext)
-    //console.log('state', state)
+    console.log('state', state)
 
-    const {isLogged, setIslogged, isAdmin, setIsAdmin} = state
-    console.log('Estate', state)
+    const { isLogged, setIslogged, isAdmin, setIsAdmin } = state.userApi
+
+    console.log('Estate', state.userApi.isLogged)
+    console.log('isAdmin', state.userApi.isAdmin)
     const adminRouter = () =>{
         return (
             <>
