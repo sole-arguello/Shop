@@ -13,18 +13,20 @@ function UserAPI(token) {
                     const res = await axios.get('/api/user/infor', {
                         headers: { Authorization: token }
                     })
-                    //console.log('res', res)
+                    console.log('res', res)
                     setIsLogged(true)
-                    res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
+                    console.log('RES', res.data.user.role)
+                    res.data.user.role === 1 ? setIsAdmin(true) : setIsAdmin(false)//cambia la vista del front
+                    
                 } catch (error) {
-                    alert("User Api "+error.response.data.msg)
+                    alert("User Api " +error.response.data.msg)
                 }
             }
             getUser()
         }
     }, [token])
   return (
-    {isLogged, isAdmin, setIsLogged, setIsAdmin}
+    {isLogged, setIsLogged, isAdmin, setIsAdmin}
   )
 }
 
