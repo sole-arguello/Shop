@@ -15,7 +15,7 @@ function Login() {
     setUserInfo({...userInfo, [name]: value});
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmitLogin = async (e) => {
     e.preventDefault();
     //console.log('info', userInfo);
     try {
@@ -23,19 +23,15 @@ function Login() {
       //console.log('response', response, "user", userInfo);
       localStorage.setItem('firstLogin', true);
       window.location.href = '/';
-      // if (response.data.accessToken) {
-      //   localStorage.setItem('accessToken', response.data.Token);
-      //   window.location.href = '/';
-      // }
 
     } catch (error) {
       console.log('error', error);
-      alert("Loguin  "+error.response.data.msg);
+      alert("Loguin  "+ error.response.data.msg);
     }
 
   }
   return (
-    <div className='login-page' onSubmit={handleSubmit}>
+    <div className='login-page' onSubmit={handleSubmitLogin}>
       <form >
         <h2>Login</h2>
         <input type="email" name='email' required placeholder='Email'

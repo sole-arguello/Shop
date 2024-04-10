@@ -14,7 +14,7 @@ function Register() {
     setUserInfo({ ...userInfo, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmitRegister = async (e) => {
     e.preventDefault();
     //console.log('info', userInfo);
     try {
@@ -33,7 +33,7 @@ function Register() {
     }
   };
   return (
-    <div className="login-page" onSubmit={handleSubmit}>
+    <div className="login-page" onSubmit={handleSubmitRegister}>
       <form>
         <h2>Register</h2>
         <input
