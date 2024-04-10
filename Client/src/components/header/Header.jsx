@@ -12,7 +12,7 @@ function Header() {
 
     const { isLogged, setIslogged, isAdmin, setIsAdmin } = state.userApi
 
-    console.log('Estate', state.userApi.isLogged)
+    console.log('isLogged', state.userApi.isLogged)
     console.log('isAdmin', state.userApi.isAdmin)
     const adminRouter = () =>{
         return (
@@ -38,9 +38,7 @@ function Header() {
            )
     }
 
-
-
-  return (
+return (
     <header>
         <div className="menu">
             

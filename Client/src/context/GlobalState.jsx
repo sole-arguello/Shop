@@ -7,12 +7,16 @@ import axios from 'axios';
 export const DataProvider = ({ children }) => {
     const [token, setToken] = useState(false)
     const refreshToken = async () => {
-        const res = await axios.get('/api/user/refresh_token')
-        //console.log('token', token)
-        setToken(res.data.accessToken)
-    //     setTimeout(() => {
-    //         refreshToken()
-    //     }, 10 * 60 * 1000)
+        try {
+            const res = await axios.get('/api/user/refresh_token')
+            //console.log('token', token)
+            setToken(res.data.accessToken)
+        //     setTimeout(() => {
+        //         refreshToken()
+        //     }, 10 * 60 * 1000) 
+        } catch (error) {
+            console.log('error refresh global state', error)
+        }
     }
 
     useEffect(() => {
