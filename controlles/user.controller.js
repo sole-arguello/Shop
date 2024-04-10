@@ -20,11 +20,11 @@ export class UserController {
                 password: passwordHash
             })
             await newUser.save()
-            const accessToken = createAccessToken({_id: newUser._id})
-            const refreshToken = createRefreshToken({_id: newUser._id})
+            const accessToken = createAccessToken({id: newUser._id})
+            const refreshToken = createRefreshToken({id: newUser._id})
             res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,
-                path: '/user/refresh_token'
+                path: '/api/user/refresh_token'
             })
 
             return res.status(200).json({ message: 'register success', accessToken }); 
@@ -43,8 +43,8 @@ export class UserController {
             const isMatch = await bcrypt.compare(password, user.password);
             if(!isMatch) return res.status(400).json({ message: 'Incorrect password' });
 
-            const accessToken = createAccessToken({_id: user._id})
-            const refreshToken = createRefreshToken({_id: user._id})
+            const accessToken = createAccessToken({id: user._id})
+            const refreshToken = createRefreshToken({id: user._id})
             res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,
                 path: '/api/user/refresh_token'
@@ -71,7 +71,7 @@ export class UserController {
             if(!rf_token) return res.status(400).json({message: 'Please login or register'})
             jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
                 if(err) return res.status(400).json({message: 'Login or register now'})
-                const accessToken = createAccessToken({_id: user._id})
+                const accessToken = createAccessToken({id: user._id})
                 return res.json({accessToken})
             })          
         } catch (error) {
