@@ -11,7 +11,7 @@ function CategoriesAPI() {
     const getCategories = async () => {
       const res = await axios.get('/api/category')
       console.log('res categorias', res.data.categories)
-      //setCategories(res)
+      setCategories(res.data.categories)
     }
     getCategories()
   }, [callback])
