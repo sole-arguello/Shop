@@ -21,7 +21,7 @@ function UserAPI(token) {
                     
                 } catch (error) {
                     console.log('error user api', error)
-                    alert("User Api " +error.response.data.msg)
+                    alert("User Api " + error.response.data.msg)
                 }
             }
             getUser()
