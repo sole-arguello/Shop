@@ -8,16 +8,16 @@ import { Link } from "react-router-dom"
 import axios from 'axios'
 function Header() {
     const state = useContext(GlobalContext)
-    console.log('state', state)
+    //console.log('state header', state)
     const { isLogged, setIslogged, isAdmin, setIsAdmin } = state.userApi
     console.log('isLogged', state.userApi.isLogged)
     console.log('isAdmin', state.userApi.isAdmin)
     const { cart } = state.userApi
-    console.log('cart in header', cart)
+    //console.log('cart in header', cart)
     const adminRouter = () =>{
         return (
             <>
-                <li><Link to="/create_product">Create Product</Link></li>,
+                <li><Link to="/create_product">Create Product</Link></li>
                 <li><Link to="/category">Category</Link></li>
             </>
            )
@@ -32,7 +32,7 @@ function Header() {
     const loggedRouter = () =>{
         return (
             <>
-                <li><Link to="/history">History</Link></li>,
+                <li><Link to="/history">History</Link></li>
                 <li><Link to="/" onClick={loggedOut}>Logout</Link></li>
             </>
            )
