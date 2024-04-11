@@ -8,7 +8,7 @@ function ProductItem({product, isAdmin}) {
 
   const state = useContext(GlobalContext)
   console.log('Estado en product item', state)
-  const { addCart } = state.userApi.addCart
+  const { addCart } = state.userApi
   console.log('addCart', addCart)
 
 
