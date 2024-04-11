@@ -6,9 +6,9 @@ import './ProductItem.css'
 
 function ProductItem({product, isAdmin}) {
 
-  const { state } = useContext(GlobalContext)
-  console.log('Estado en product item', state.userApi)
-  const { addCart } = state.userApi
+  const state = useContext(GlobalContext)
+  console.log('Estado en product item', state)
+  const { addCart } = state.userApi.addCart
   console.log('addCart', addCart)
 
 
