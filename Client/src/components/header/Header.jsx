@@ -9,11 +9,11 @@ import axios from 'axios'
 function Header() {
     const state = useContext(GlobalContext)
     console.log('state', state)
-
     const { isLogged, setIslogged, isAdmin, setIsAdmin } = state.userApi
-
     console.log('isLogged', state.userApi.isLogged)
     console.log('isAdmin', state.userApi.isAdmin)
+    const { cart } = state.userApi
+    console.log('cart in header', cart)
     const adminRouter = () =>{
         return (
             <>
@@ -62,7 +62,7 @@ return (
             isAdmin 
             ? '' 
             : <div className="cart-icon">
-                <span>0</span>
+                <span>{cart.length}</span>
                 <Link to='/cart'>
                     <img src={Cart} alt="cart" width={40}/>
                 </Link>

@@ -4,6 +4,7 @@ import axios from "axios"
 function UserAPI(token) {
     const [isLogged, setIsLogged] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
+    const [cart , setCart] = useState([])
 
     useEffect(() => {
        
@@ -27,8 +28,24 @@ function UserAPI(token) {
             getUser()
         }
     }, [token])
+
+    const addCart = (product) => {
+        //verificar si el usuario esta logueado
+        if(!isLogged) return alert("Please login to continue buying")
+
+        const check = cart.every(item => {
+            return item._id !== product._id
+        })
+        // verificar que el producto no este en el carrito
+        if(check){
+            setCart([...cart, {...product, quantity: 1}])
+        }else{
+            console.log('El producto ya existe en el carrito')
+            alert("The product is already in the cart")
+        }
+    }
   return (
-    {isLogged, setIsLogged, isAdmin, setIsAdmin}
+    {isLogged, setIsLogged, isAdmin, setIsAdmin, cart, setCart, addCart}
   )
 }
 
