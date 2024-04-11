@@ -64,7 +64,7 @@ export class UserController {
     static logout = async(req, res) => {
         try {
             const logout = res.clearCookie('refreshToken', { path: '/api/user/refresh_token' });
-            console.log('logout', logout)
+            //console.log('logout', logout)
             return res.status(200).json({message: 'Logged out'})
         } catch (error) {
             console.log("error logout", error)
