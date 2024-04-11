@@ -7,9 +7,10 @@ import axios from 'axios';
 export const DataProvider = ({ children }) => {
     const [token, setToken] = useState(false)
     const refreshToken = async () => {
+        console.log('token in global state refresh', token)
         try {
             const res = await axios.get('/api/user/refresh_token')
-            //console.log('token', token)
+            console.log('token in refresh', res.data)
             setToken(res.data.accessToken)
         //     setTimeout(() => {
         //         refreshToken()

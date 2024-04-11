@@ -8,6 +8,7 @@ function UserAPI(token) {
     useEffect(() => {
        
         if(token) {
+            console.log('token user api', token)
             const getUser = async () => {
                 try {
                     const res = await axios.get('/api/user/infor', {
@@ -19,6 +20,7 @@ function UserAPI(token) {
                     res.data.user.role === 1 ? setIsAdmin(true) : setIsAdmin(false)//cambia la vista del front
                     
                 } catch (error) {
+                    console.log('error user api', error)
                     alert("User Api " +error.response.data.msg)
                 }
             }

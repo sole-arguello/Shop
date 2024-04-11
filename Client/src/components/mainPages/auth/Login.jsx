@@ -19,13 +19,14 @@ function Login() {
     e.preventDefault();
     //console.log('info', userInfo);
     try {
-      await axios.post('/api/user/login', {...userInfo});
-      //console.log('response', response, "user", userInfo);
+      console.log('user info', userInfo);
+      const res =await axios.post('/api/user/login', {...userInfo});
+      console.log('handle submit response', res.data)
       localStorage.setItem('firstLogin', true);
       window.location.href = '/';
 
     } catch (error) {
-      console.log('error', error);
+      console.log('error submit loguin', error);
       alert("Loguin  "+ error.response.data.msg);
     }
 

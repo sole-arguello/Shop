@@ -13,6 +13,7 @@ export const auth = (req, res, next) => {
         })
 
     } catch (error) {
+        console.log('error auth', error)
         return res.status(500).json({ msg: error.message }) 
     }
 
