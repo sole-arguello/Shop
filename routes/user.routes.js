@@ -19,6 +19,8 @@ router.get('/refresh_token', UserController.refreshToken );
 //localhost:5000/user/infor
 router.get('/infor', auth, UserController.getUser );//perfil
 
+router.patch('/addcart', auth, UserController.addCart );
+
 export { router as userRouter }
 
 
