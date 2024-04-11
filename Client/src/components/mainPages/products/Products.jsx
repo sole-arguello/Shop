@@ -5,24 +5,22 @@ import './Products.css';
 import Loading from '../utils/Loading/Loading';
 
 function Products() {
-    const { productsApi } = useContext(GlobalContext);
-    //console.log('productos', productsApi.products);
-
-    const { products } = productsApi;
+    const state = useContext(GlobalContext);
+    //console.log('Estado products', state)
+    const { products } = state.productsApi;
+    //console.log('products', products)
+    const { isAdmin } = state.userApi
+    console.log('Products isAdmin', isAdmin)
+    // const { addCart } = state.userApi
+    // console.log('addCart in products', addCart)
 
     return (
         <>
             <div className='products'>
-                {products.map( product => {return <ProductItem key={product._id} product={product}/>})}
-                    {/* <ul>
-                        {productsApi.products.map(product => (
-                            <li key={product.id}>
-                                <h3>{product.title}</h3>
-                                <p>{product.description}</p>
-                                <p>Price: {product.price}</p>
-                            </li>
-                        ))}
-                    </ul> */}
+                {products.map( product => {
+                    return <ProductItem key={product._id} product={product} isAdmin={isAdmin}/>})
+                }
+ 
             </div>
             {
                 products.length === 0 && <Loading />
