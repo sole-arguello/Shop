@@ -15,8 +15,10 @@
     height: 300px;
     display: block;
     object-fit: cover;
+    /* position: relative; */
     border-radius: 10px;
     border: 2px solid firebrick;
+    transform: scaleX(1.11);
 }
 
 .product_card img:hover{
@@ -27,6 +29,12 @@
     border: 1.5px solid gray;
     margin-top: 2px;
     padding: 2px;
+}
+.product_card input{
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    z-index: 4;
 }
 .product_box h2{
     width: 100%;
