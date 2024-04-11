@@ -1,16 +1,21 @@
 import { createContext, useEffect, useState } from 'react';
 import ProductAPI from '../api/ProductAPI';
 import UserAPI from '../api/UserAPI';
-export const GlobalContext = createContext();
 import axios from 'axios';
+import CategoriesAPI from '../api/CategoriesAPI';
+
+
+
+export const GlobalContext = createContext();
+
 
 export const DataProvider = ({ children }) => {
     const [token, setToken] = useState(false)
     const refreshToken = async () => {
-        console.log('token in global state refresh', token)
+        //console.log('token in global state refresh', token)
         try {
             const res = await axios.get('/api/user/refresh_token')
-            console.log('token in refresh', res.data)
+           // console.log('token in refresh', res.data)
             setToken(res.data.accessToken)
         //     setTimeout(() => {
         //         refreshToken()
@@ -22,7 +27,6 @@ export const DataProvider = ({ children }) => {
 
     useEffect(() => {
         const firstLogin = localStorage.getItem('firstLogin')
-        //console.log('firstLogin', firstLogin)
         if(firstLogin) refreshToken()
     }, [])
 
@@ -31,7 +35,8 @@ export const DataProvider = ({ children }) => {
     const state = {
         token: [token, setToken],
         productsApi: ProductAPI(),
-        userApi: UserAPI(token)
+        userApi: UserAPI(token),
+        categoriesApi: CategoriesAPI(token)
     } 
     //console.log('estado', state)
     return (
