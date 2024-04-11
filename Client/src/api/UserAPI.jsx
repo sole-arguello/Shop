@@ -29,7 +29,7 @@ function UserAPI(token) {
         }
     }, [token])
 
-    const addCart = (product) => {
+    const addCart = async (product) => {
         //verificar si el usuario esta logueado
         if(!isLogged) return alert("Please login to continue buying")
 
@@ -38,7 +38,8 @@ function UserAPI(token) {
         })
         // verificar que el producto no este en el carrito
         if(check){
-            setCart([...cart, {...product, quantity: 1}])
+            addCart([...cart, {...product, quantity: 1}])
+            // setCart([...cart, {...product, quantity: 1}])
         }else{
             console.log('El producto ya existe en el carrito')
             alert("The product is already in the cart")
