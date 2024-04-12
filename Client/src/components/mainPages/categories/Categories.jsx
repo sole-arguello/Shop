@@ -17,15 +17,11 @@ function Categories() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "/api/category",
-        { name: category },
-        {
-          headers: { Authorization: token },
-
-        }
+        "/api/category", { name: category },
+        { headers: { Authorization: token } }
       );
-      //setCallback(!callback)
-      console.log("Respuesta axios categoria", res);
+      setCallback(!callback)
+      //console.log("Respuesta axios categoria", res);
       alert(res.data.msg);
     } catch (error) {
       console.log("Error submit categorias ", error);
@@ -38,7 +34,8 @@ function Categories() {
 
       <form action="" onSubmit={createCategories}>
         <label htmlFor="category"> Category</label>
-        <input type="text" name="category" value={category} required onChange={(e) => setCategory(e.target.value)} />
+        <input type="text" name="category" value={category} required 
+        onChange={(e) => setCategory(e.target.value)} />
 
         <button type="submit">Save</button>
       </form>
