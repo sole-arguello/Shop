@@ -10,13 +10,15 @@ export const GlobalContext = createContext();
 
 
 export const DataProvider = ({ children }) => {
+    console.log('children context', children)
     const [token, setToken] = useState(false)
     const refreshToken = async () => {
         //console.log('token in global state refresh', token)
         try {
             const res = await axios.get('/api/user/refresh_token')
            // console.log('token in refresh', res.data)
-            setToken(res.data.accessToken)
+            return setToken(res.data.accessToken)
+
         //     setTimeout(() => {
         //         refreshToken()
         //     }, 10 * 60 * 1000) 

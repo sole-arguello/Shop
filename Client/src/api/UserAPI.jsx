@@ -17,7 +17,7 @@ function UserAPI(token) {
                     })
                     //console.log('res userAPI', res)
                     setIsLogged(true)
-                    console.log('RES', res.data.user.role)
+                    console.log('RES role', res.data.user.role)
                     res.data.user.role === 1 ? setIsAdmin(true) : setIsAdmin(false)//cambia la vista del front
                     setCart(res.data.user.cart)
                 } catch (error) {

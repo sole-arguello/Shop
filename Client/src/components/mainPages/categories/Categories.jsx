@@ -4,6 +4,7 @@ import axios from "axios";
 import "./Categories.css";
 
 function Categories() {
+
   const state = useContext(GlobalContext);
   console.log("Estado categorias", state);
   const { categories, setCategories, callback, setCallback } = state.categoriesApi;
@@ -20,6 +21,7 @@ function Categories() {
         { name: category },
         {
           headers: { Authorization: token },
+
         }
       );
       //setCallback(!callback)
@@ -33,6 +35,7 @@ function Categories() {
 
   return (
     <div className="categories">
+
       <form action="" onSubmit={createCategories}>
         <label htmlFor="category"> Category</label>
         <input type="text" name="category" value={category} required onChange={(e) => setCategory(e.target.value)} />
@@ -51,6 +54,7 @@ function Categories() {
           </div>
         ))}
       </div>
+
     </div>
   );
 }
