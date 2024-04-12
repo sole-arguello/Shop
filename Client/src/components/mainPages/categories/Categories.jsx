@@ -5,11 +5,13 @@ import './Categories.css'
 
 function Categories() {
     const state = useContext(GlobalContext)
-    console.log('Estado categorias', state)
     const { categories, setCategories, callback, setCallback } = state.categoriesApi
     const [category, setCategory] = useState('')
-    const { token } = state.token
+    const token  = state.token
 
+    console.log('Estado categorias', state)
+    console.log('Categorias', categories)
+    console.log('Callback categorias', callback)
     console.log('Token categorias', token)
 
     const createCategories = async (e) =>{
@@ -18,8 +20,9 @@ function Categories() {
                 const res = await axios.post('/api/category', {name: category},{
                     headers:{Authorization: token}
                 })
-                //setCallback(!callback)
                 console.log('Respuesta axios categoria', res)
+                setCallback(!callback)
+                
                 alert(res.data.msg)
         } catch (error) {
             console.log("Error submit categorias ",error) 
@@ -30,7 +33,7 @@ function Categories() {
 
   return (
     <div className="categories">
-        <form action="" onSubmit={createCategories}>
+        <form onSubmit={createCategories}>
             <label htmlFor="category"> Category</label>
             <input type="text" name="category" value={category} required 
             onChange={(e) => setCategory(e.target.value)}/>
