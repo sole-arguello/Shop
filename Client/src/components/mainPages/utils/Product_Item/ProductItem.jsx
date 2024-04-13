@@ -7,9 +7,9 @@ import './ProductItem.css'
 function ProductItem({product, isAdmin}) {
 
   const state = useContext(GlobalContext)
-  console.log('Estado en product item', state)
+  //console.log('Estado en product item', state)
   const { addCart } = state.userApi
-  console.log('addCart', addCart)
+  //console.log('addCart', addCart)
 
 
   return (
