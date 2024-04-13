@@ -23,6 +23,7 @@ function Pages() {
     <Route path="/register" element={ isLogged ? <NotFound /> : <Register />} />
     <Route path="/category" element={ isLogged ? <Categories /> : <NotFound />} />
     <Route path='/create_product' element={isLogged ? <CreateProduct /> : <NotFound />} />
+    <Route path='/create_product' element={isLogged ? <CreateProduct /> : <NotFound />} />
     <Route path="/cart" element={<Cart />} />
     <Route path="/detail/:id" element={<DetailProduct />} />
 
