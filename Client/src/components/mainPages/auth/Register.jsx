@@ -28,8 +28,12 @@ function Register() {
       //   window.location.href = '/';
       // }
     } catch (error) {
-      console.log("error", error);
-      alert(error.response.data.message);
+      console.log("error register", error);
+      if (error.response && error.response.data && error.response.data.msg) {
+        alert("Register error " + error.response.data.msg); // Añadí una verificación para asegurar que 'msg' esté definido
+      } else {
+        alert("Register failed"); // Añadí una alerta genérica en caso de que 'msg' no esté definido
+      }
     }
   };
   return (

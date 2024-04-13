@@ -20,20 +20,24 @@ function Login() {
     //console.log('info', userInfo);
     try {
       console.log('user info', userInfo);
-      const res =await axios.post('/api/user/login', {...userInfo});
+      const res = await axios.post('/api/user/login', {...userInfo});
       console.log('handle submit response', res.data)
       localStorage.setItem('firstLogin', true);
       window.location.href = '/';
 
     } catch (error) {
       console.log('error submit loguin', error);
-      alert("Loguin  "+ error.response.data.msg);
+      if (error.response && error.response.data && error.response.data.msg) {
+        alert("Login " + error.response.data.msg); // Añadí una verificación para asegurar que 'msg' esté definido
+      } else {
+        alert("Login failed"); // Añadí una alerta genérica en caso de que 'msg' no esté definido
+      }
     }
 
   }
   return (
-    <div className='login-page' onSubmit={handleSubmitLogin}>
-      <form >
+    <div className='login-page'>
+      <form  onSubmit={handleSubmitLogin}>
         <h2>Login</h2>
         <input type="email" name='email' required placeholder='Email'
         value={userInfo.email} onChange={handleChangeInput}/>
