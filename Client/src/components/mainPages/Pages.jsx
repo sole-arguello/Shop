@@ -18,7 +18,7 @@ function Pages() {
     
       
   <Routes>
-    <Route path="/" element={<Products />} />
+    <Route path="/" exact element={<Products />} />
     <Route path="/login" element={ isLogged ? <NotFound /> : <Login />} />
     <Route path="/register" element={ isLogged ? <NotFound /> : <Register />} />
     <Route path="/category" element={ isLogged ? <Categories /> : <NotFound />} />
