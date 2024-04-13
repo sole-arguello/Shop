@@ -6,26 +6,61 @@ import "./Categories.css";
 function Categories() {
 
   const state = useContext(GlobalContext);
-  console.log("Estado categorias", state);
   const { categories, setCategories, callback, setCallback } = state.categoriesApi;
   const [category, setCategory] = useState("");
   const token = state.token[0];
+  const [onEdit, setOnEdit] = useState(false);
+  const [id, setId] = useState("");
+  
 
+  console.log("Estado categorias", state);
   console.log("Token categorias", token);
 
   const createCategories = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "/api/category", { name: category },
-        { headers: { Authorization: token } }
-      );
-      setCallback(!callback)
-      //console.log("Respuesta axios categoria", res);
-      alert(res.data.msg);
+
+        if(onEdit){
+            const res = await axios.put(`/api/category/${id} `, { name: category },
+                { headers: { Authorization: token } }
+            );
+            //console.log("Respuesta axios categoria put", res.data.message);
+            alert(res.data.message);            
+
+        }else{
+            
+            const res = await axios.post(
+                "/api/category", { name: category },
+                { headers: { Authorization: token } }
+            );
+            //console.log('res axios categorias post', res.data.message)
+            alert(res.data.message);
+
+        }
+        
+        setCallback(!callback);//actualizar categorias
+        setCategories(" ");//limpiar categorias
     } catch (error) {
-      console.log("Error submit categorias ", error);
-      alert(error.response.data.msg);
+      console.log("Error submit categorias ", error.response.message);
+      alert(error.response.data.message);
+    }
+  };
+
+  const editCategory = async (id, name) => {
+    setId(id);
+    setCategory(name);
+    setOnEdit(true);
+  };
+
+  const deleteCategory = async (id) => {
+    try {
+      const res = await axios.delete(`/api/category/${id}`, {
+        headers: { Authorization: token },
+      });
+      alert(res.data.message);
+      setCallback(!callback);
+    } catch (error) {
+      console.log('error en delete category', error);
     }
   };
 
@@ -37,7 +72,7 @@ function Categories() {
         <input type="text" name="category" value={category} required 
         onChange={(e) => setCategory(e.target.value)} />
 
-        <button type="submit">Save</button>
+        <button type="submit">{onEdit ? "Update" : "Save"}</button>
       </form>
 
       <div className="col">
@@ -45,8 +80,8 @@ function Categories() {
           <div className="row" key={category._id}>
             <p>{category.name}</p>
             <div>
-              <button>Delete</button>
-              <button>Edit</button>
+              <button onClick={() => editCategory(category._id, category.name)}>Edit</button>
+              <button onClick={() => deleteCategory(category._id)}>Delete</button>
             </div>
           </div>
         ))}
