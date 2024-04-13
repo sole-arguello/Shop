@@ -10,7 +10,7 @@ export const GlobalContext = createContext();
 
 
 export const DataProvider = ({ children }) => {
-    console.log('children context', children)
+    //console.log('children context', children)
     const [token, setToken] = useState(false)
     const refreshToken = async () => {
         //console.log('token in global state refresh', token)
