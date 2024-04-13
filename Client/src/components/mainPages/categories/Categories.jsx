@@ -26,7 +26,7 @@ function Categories() {
             );
             //console.log("Respuesta axios categoria put", res.data.message);
             alert(res.data.message);            
-
+            setOnEdit(false);
         }else{
             
             const res = await axios.post(
