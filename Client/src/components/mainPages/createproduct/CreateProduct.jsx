@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { GlobalContext } from '../../../context/GlobalState'
 import Loading from '../utils/Loading/Loading'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './CreateProduct.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate , useParams} from 'react-router-dom'
 
 
 const initialState = {
@@ -12,20 +12,40 @@ const initialState = {
     price: 0,
     description: 'Description of product component create product',
     content: ' Content of product component create product',
-    category: ''
+    category: '',
+    id: '',
 }
 function CreateProduct() {
 
     const [product, setProduct] = useState(initialState)
+
+    // en el navegador El STATE no me muesta los productos pero en products si y ambos vienen del contexto  ////
     const state = useContext(GlobalContext)
-    console.log('Estado create product', state)
+    
+    const { products, setProducts } = state.productsApi
+
     const {categories} = state.categoriesApi
-    console.log('categories create product', categories)
     const {isAdmin} = state.userApi
+    const token = state.token[0]
     const [ images, setImages ] = useState(false)
     const [ loading, setLoading ] = useState(false)
-    const token = state.token[0]
     const navigate = useNavigate('/')
+    const param = useParams()
+    
+    console.log('Estado create product', state)
+    console.log('Product API en create product', products)
+    //console.log('categories create product', categories)
+
+    useEffect(() =>{        
+        if(param.id){
+            products.forEach( product => {
+                if(product._id === param.id){
+                    setProduct(product)
+                    //setImages(product.images)
+                }
+            })
+        }
+    }, [param.id])
 
     const handleChangeInput = e => {
         const { name, value } = e.target
@@ -94,7 +114,7 @@ function CreateProduct() {
             //alert(res.data.message)
             setImages(false)
             setProduct(initialState)
-            navigate('/')
+            navigate()
         } catch (error) {
             console.log("Error submit create product",error)
             alert(error.response.data.message)
@@ -116,7 +136,7 @@ function CreateProduct() {
             <div className='row'>
                 <label htmlFor="product_id" > Product ID</label>
                 <input type="text" name='product_id' id='product_id' required value={product.product_id}
-                  onChange={handleChangeInput}/>
+                  onChange={handleChangeInput} />
             </div>
 
             <div className='row'>
