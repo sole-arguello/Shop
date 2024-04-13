@@ -27,11 +27,7 @@ function Login() {
 
     } catch (error) {
       console.log('error submit loguin', error);
-      if (error.response && error.response.data && error.response.data.msg) {
-        alert("Login " + error.response.data.msg); // Añadí una verificación para asegurar que 'msg' esté definido
-      } else {
-        alert("Login failed"); // Añadí una alerta genérica en caso de que 'msg' no esté definido
-      }
+      alert("Login failed", error.response.data.message);
     }
 
   }
