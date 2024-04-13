@@ -13,8 +13,8 @@ function Categories() {
   const [id, setId] = useState("");
   
 
-  console.log("Estado categorias", state);
-  console.log("Token categorias", token);
+  //console.log("Estado categorias", state);
+  //console.log("Token categorias", token);
 
   const createCategories = async (e) => {
     e.preventDefault();
