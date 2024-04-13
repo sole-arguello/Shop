@@ -39,7 +39,7 @@ function Categories() {
         }
         
         setCallback(!callback);//actualizar categorias
-        setCategories(" ");//limpiar categorias
+        setCategory(" ");//limpiar categorias
     } catch (error) {
       console.log("Error submit categorias ", error.response.message);
       alert(error.response.data.message);
