@@ -13,37 +13,47 @@ const initialState = {
     description: 'Description of product component create product',
     content: ' Content of product component create product',
     category: '',
-    id: '',
+    _id: '',
 }
 function CreateProduct() {
 
     const [product, setProduct] = useState(initialState)
 
-    // en el navegador El STATE no me muesta los productos pero en products si y ambos vienen del contexto  ////
+    // en el navegador El STATE no me muesta los productos pero en
+    //en el componente products si y ambos vienen del contexto  ////
     const state = useContext(GlobalContext)
     
-    const { products, setProducts } = state.productsApi
+    const { products, callback, setCallback } = state.productsApi
 
     const {categories} = state.categoriesApi
     const {isAdmin} = state.userApi
     const token = state.token[0]
     const [ images, setImages ] = useState(false)
     const [ loading, setLoading ] = useState(false)
-    const navigate = useNavigate('/')
+    const [onEdit , setOnEdit] = useState(false)    
+    const navigate = useNavigate()
     const param = useParams()
     
     console.log('Estado create product', state)
     console.log('Product API en create product', products)
     //console.log('categories create product', categories)
 
-    useEffect(() =>{        
+    useEffect(() =>{ 
+             
         if(param.id){
+            setOnEdit(true)
             products.forEach( product => {
+                
                 if(product._id === param.id){
+                    //console.log('product Id', product._id)
                     setProduct(product)
-                    //setImages(product.images)
+                    setImages(product.images)
                 }
             })
+        }else{
+            setOnEdit(false)
+            setImages(false)
+            setProduct(initialState)
         }
     }, [param.id])
 
@@ -107,14 +117,18 @@ function CreateProduct() {
         try {
             if(!isAdmin) return alert('You are not an Admin')
             if(!images) return alert("No image Found")
-            const res = await axios.post('/api/products', {...product, images}, {
+            onEdit
+            ? await axios.put(`/api/products/${product._id}`, {...product, images}, {
                 headers: { Authorization: token}
             })
-            console.log("Res submit product create",res.data)
+            : await axios.post('/api/products', {...product, images}, {
+                headers: { Authorization: token}
+            })
             //alert(res.data.message)
             setImages(false)
             setProduct(initialState)
-            navigate()
+            setCallback(!callback)
+            navigate('/')
         } catch (error) {
             console.log("Error submit create product",error)
             alert(error.response.data.message)
@@ -135,8 +149,8 @@ function CreateProduct() {
         <form action="" onSubmit={handleSubmitCreateProduct}>
             <div className='row'>
                 <label htmlFor="product_id" > Product ID</label>
-                <input type="text" name='product_id' id='product_id' required value={product.product_id}
-                  onChange={handleChangeInput} />
+                <input type="text" name='product_id' id='product_id' required value={ onEdit }
+                  onChange={handleChangeInput} disabled={product._id}/>
             </div>
 
             <div className='row'>
@@ -176,7 +190,7 @@ function CreateProduct() {
                 </select>
             </div>
 
-            <button type='submit'> Create Product </button>
+            <button type='submit'> { onEdit ? "Edit Product" : "Create Product"} </button>
         </form>
     </div>
   )
