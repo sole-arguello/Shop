@@ -22,8 +22,9 @@ export class CategoryController {
             
             //sino existe la creo
             const newCategory = new Category({ name });
+            console.log('categoria recibida',newCategory)
             await newCategory.save();
-            return res.status(200).json({message: 'Created category sucessfully', newCategory });
+            return res.status(200).json({message: 'Created category sucessfully' });
         } catch (error) {
             return res.status(500).json({ message: error.message });
         }

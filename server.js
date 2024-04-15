@@ -20,7 +20,7 @@ app.use(fileUpload({
 }))
 
 //rutas
-app.use('/user', userRouter)
+app.use('/api/user', userRouter)
 app.use('/api', categoryRouter)
 app.use('/api', uploadRouter)
 app.use('/api', productRouter)

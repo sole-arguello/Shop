@@ -1,4 +1,13 @@
-#root {
+
+.App {
+  max-width: 1200px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 5px;
+  box-shadow: 0 0 100px rgb(189, 189, 189);
+}
+
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +48,4 @@
 
 .read-the-docs {
   color: #888;
-}
+} */
