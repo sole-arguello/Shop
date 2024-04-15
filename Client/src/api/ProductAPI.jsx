@@ -13,13 +13,14 @@ function ProductAPI() {
           //console.log('res', res.data.products)
           setProducts(res.data.products);
         } catch (error) {
-            console.error('Error fetching products:', error);
+          console.error('Error fetching products:', error);
         }
       }
 
-      getProducts()
+      getProducts() 
 
-    }, [products, setProducts])
+    }, [callback])
+    
   return (
     { products, setProducts, callback, setCallback }
   )
