@@ -30,7 +30,7 @@ export const DataProvider = ({ children }) => {
     }, [])
 
     ProductAPI()
-    console.log('Product Api in global state', ProductAPI())
+   // console.log('Product Api in global state', ProductAPI())
     const state = {
         token: [token, setToken],
         productsApi: ProductAPI(),
