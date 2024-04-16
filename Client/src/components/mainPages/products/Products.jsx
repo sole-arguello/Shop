@@ -3,8 +3,8 @@ import { GlobalContext } from '../../../context/GlobalState';
 import ProductItem from '../utils/Product_Item/ProductItem';
 import Loading from '../utils/Loading/Loading';
 import axios from 'axios';
+import Filters from './Filters';
 import './Products.css';
-
 
 function Products() {
     const state = useContext(GlobalContext);
@@ -26,7 +26,7 @@ function Products() {
 
         try {
           setLoading(true)
-          const destroyImg = axios.post(`/api/products`, 
+          const destroyImg = axios.post(`/api/destroy`, 
           {public_id: public_id},
           {headers: { Authorization: token}},
           )
@@ -40,7 +40,7 @@ function Products() {
           setLoading(false)
           setCallback(!callback)
         } catch (error) {
-          console.log('Error en delete product', error.response.data.message)
+          //console.log('Error en delete product', error.response.data.message)
           alert(error.response.data.message)
         }
       }
@@ -68,6 +68,7 @@ function Products() {
    
     return (
         <>
+        <Filters />
         { isAdmin &&
             <div className='delete-all' style={{textAlign: 'right', margin: '20px'}}>
                 <span style={{textTransform: 'uppercase', color: 'blue', letterSpacing: '1.3px' }}>Select All</span>
