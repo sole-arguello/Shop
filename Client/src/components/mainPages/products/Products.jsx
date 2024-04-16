@@ -2,9 +2,11 @@ import { useContext, useState } from 'react';
 import { GlobalContext } from '../../../context/GlobalState';
 import ProductItem from '../utils/Product_Item/ProductItem';
 import Loading from '../utils/Loading/Loading';
-import axios from 'axios';
 import Filters from './Filters';
+import LoadMore from './LoadMore';
+import axios from 'axios';
 import './Products.css';
+
 
 function Products() {
     const state = useContext(GlobalContext);
@@ -84,6 +86,7 @@ function Products() {
                 }
  
             </div>
+            <LoadMore />
             {
                 products.length === 0 && <Loading />
             }
