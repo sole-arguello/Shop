@@ -34,8 +34,8 @@ function CreateProduct() {
     const navigate = useNavigate()
     const param = useParams()
     
-    console.log('Estado create product', state)
-    console.log('Product API en create product', products)
+    //console.log('Estado create product', state)
+    //console.log('Product API en create product', products)
     //console.log('categories create product', categories)
 
     useEffect(() =>{ 
@@ -95,22 +95,32 @@ function CreateProduct() {
             alert(error.response.data.message)
         }
     }
-
     const handleDestroy = async () => {
         try {
-            if(!isAdmin) return alert('You are not an Admin')
-            setLoading(true)
-            await axios.post('/api/destroy', {public_id: images.public_id}, {
-                headers: { Authorization: token}
-            })
-            setLoading(false)
-            //setProduct({...product, images: ''})
-            setImages(false)
+            if (!isAdmin) return alert('You are not an Admin');
+            setLoading(true);
+            if (images && images.public_id) {
+                await axios.post('/api/destroy', { public_id: images.public_id }, {
+                    headers: { Authorization: token }
+                });
+            } else {
+                //console.log('Paso por handle destroy');
+                alert('No image found for deletion');
+            }
+            await axios.delete(`/api/products/${product._id}`, {
+                headers: { Authorization: token }
+            });
+            setLoading(false);
+            setImages(false);
+            setProduct(initialState);
+            setCallback(!callback);
+            navigate('/');
         } catch (error) {
-            console.log("Error handle destroy",error)
-            alert(error.response.data.message)
+            //console.log("Error handle destroy", error);
+            alert(error.response.data.message);
         }
-    }
+    };
+    
 
     const handleSubmitCreateProduct = async (e) => {
         e.preventDefault()
@@ -130,7 +140,7 @@ function CreateProduct() {
             setCallback(!callback)
             navigate('/')
         } catch (error) {
-            console.log("Error submit create product",error)
+            //console.log("Error submit create product",error)
             alert(error.response.data.message)
         }
     }
@@ -149,7 +159,7 @@ function CreateProduct() {
         <form action="" onSubmit={handleSubmitCreateProduct}>
             <div className='row'>
                 <label htmlFor="product_id" > Product ID</label>
-                <input type="text" name='product_id' id='product_id' required value={ onEdit }
+                <input type="text" name='product_id' id='product_id' required value={product.product_id }
                   onChange={handleChangeInput} disabled={product._id}/>
             </div>
 
