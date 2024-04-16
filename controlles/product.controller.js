@@ -40,25 +40,40 @@ class APIfeature{
 }
 
 export class ProductController {
-
+  
     static createProduct = async (req, res) => {
       try {
-        const { product_id, title, price, description, content, images, category } = req.body;
+          const { product_id, title, price, description, content, images, category } = req.body;
 
-        if(!images) return res.status(400).json({ message: 'No images uploaded.' });
+          // Verificar si se han adjuntado imágenes al crear el producto
+          if (!images) {
+              //console.log('No images uploaded create.');
+              return res.status(400).json({ message: 'No images uploaded.' });
+          }
 
-        const product = await Products.findOne({ product_id });
-        if(product) return res.status(400).json({ message: 'This product already exists.' });
+          const product = await Products.findOne({ product_id });
+          if (product) {
+              //console.log('Product exist create funcionality.');
+              return res.status(400).json({ message: 'This product already exists.' });
+          }
 
-        const newProduct = new Products(
-            { product_id, title:title.toLowerCase(), price, description, content, images, category }
-        );
-        await newProduct.save();
-        return res.status(200).json({message: "Product created successfully."});
+          const newProduct = new Products({
+              product_id,
+              title: title.toLowerCase(),
+              price,
+              description,
+              content,
+              images,
+              category
+          });
+          await newProduct.save();
+          return res.status(200).json({ message: "Product created successfully." });
       } catch (error) {
-        res.status(500).json({ message: error.message });
+          //console.log("error createProduct", error.message);
+          return res.status(500).json({ message: error.message });
       }
-    }
+  }
+
 
     static getProducts = async (req, res) => {
         try {
@@ -67,6 +82,7 @@ export class ProductController {
           return res.status(200).json({ message: "Products fetched successfully. ", 
           result: products.length, products });
         } catch (error) {
+          //console.log("error getProducts", error.message);
           res.status(500).json({ message: error.message });
         }
       }
@@ -77,6 +93,7 @@ export class ProductController {
         await Products.findByIdAndDelete(id);
         return res.status(200).json({ message: "Product deleted successfully." });
       } catch (error) {
+        //console.log("error deleteProduct", error.message);
         return res.status(500).json({ message: error.message });
       }
     }
@@ -84,14 +101,18 @@ export class ProductController {
     static updateProduct = async (req, res) => {
       try {
         const {title, price, description, content, images, category} = req.body;
-        if(!images) return res.status(400).json({ message: 'No images uploaded.' });
+        if(!images) {
+          //console.log('No images uploaded actializar.');
+          return res.status(400).json({ message: 'No images uploaded.' });
+        }
         await Products.findByIdAndUpdate(
             {_id: req.params.id}, 
             { title:title.toLowerCase(), price, description, content, images, category }
         )
         return res.status(200).json({ message: "Product updated successfully." });
       } catch (error) {
-        res.status(500).json({ message: error.message });
+        //console.log("error updateProduct", error.message);
+        return res.status(500).json({ message: error.message });
       }
     }
 
