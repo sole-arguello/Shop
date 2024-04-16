@@ -41,7 +41,7 @@ router.post('/upload',auth, authAdmin, (req, res) => {
             return res.json({ public_id: result.public_id, url: result.secure_url })
         })
     } catch (error) {
-
+        //console.log('error upload rutas upload', error)
         return res.status(500).json({ mensagge: error.message })
     }
 })
@@ -49,12 +49,14 @@ router.post('/upload',auth, authAdmin, (req, res) => {
 router.post('/destroy', auth, authAdmin, (req, res) => {
     try {
         const { public_id } = req.body
+        //console.log("public_id del destroy", public_id)
         if(!public_id) return res.status(400).json({ msg: 'No images selected.' })
         cloudinary.v2.uploader.destroy(public_id, async(err, result) => {
             if(err) throw err
             res.json({ msg: "Deleted image from cloudinary successfully." })
         })
     } catch (error) {
+        //console.log('error destroy rutas upload', error)
         return res.status(500).json({ mensagge: error.message })
     }
 })

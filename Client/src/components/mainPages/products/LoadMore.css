@@ -1,0 +1,11 @@
+.load-more{
+    text-align: center;
+
+}
+
+.load-more button{
+    padding: 10px 25px;
+    margin-top: 20px;
+    border: 1px solid rgb(219, 32, 32);
+    text-transform: uppercase;
+}

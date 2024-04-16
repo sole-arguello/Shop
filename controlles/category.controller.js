@@ -1,4 +1,5 @@
-import {  Category } from "../models/categoryModel.js";
+import { Category } from "../models/categoryModel.js";
+import { Producs } from "../models/productModel.js";
 
 export class CategoryController {
 
@@ -33,6 +34,8 @@ export class CategoryController {
     static deleteCategory = async(req, res) => {
         try {
             const { id } = req.params;
+            const products = await Producs.findOne({ category: id });
+            if(products) return res.status(400).json({ message: 'Please delete related products also' });
             await Category.findByIdAndDelete(id);
             return res.status(200).json({ message: 'category Deleted sucessfully' });
         } catch (error) {

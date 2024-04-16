@@ -20,20 +20,20 @@ function Login() {
     //console.log('info', userInfo);
     try {
       console.log('user info', userInfo);
-      const res =await axios.post('/api/user/login', {...userInfo});
+      const res = await axios.post('/api/user/login', {...userInfo});
       console.log('handle submit response', res.data)
       localStorage.setItem('firstLogin', true);
       window.location.href = '/';
 
     } catch (error) {
       console.log('error submit loguin', error);
-      alert("Loguin  "+ error.response.data.msg);
+      alert("Login failed", error.response.data.message);
     }
 
   }
   return (
-    <div className='login-page' onSubmit={handleSubmitLogin}>
-      <form >
+    <div className='login-page'>
+      <form  onSubmit={handleSubmitLogin}>
         <h2>Login</h2>
         <input type="email" name='email' required placeholder='Email'
         value={userInfo.email} onChange={handleChangeInput}/>

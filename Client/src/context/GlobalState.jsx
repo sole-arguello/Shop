@@ -10,8 +10,8 @@ export const GlobalContext = createContext();
 
 
 export const DataProvider = ({ children }) => {
-    console.log('children context', children)
-    const [token, setToken] = useState(false)
+    //console.log('children context', children)
+    const [token, setToken] = useState(false) 
     const refreshToken = async () => {
         //console.log('token in global state refresh', token)
         try {
@@ -19,9 +19,6 @@ export const DataProvider = ({ children }) => {
            // console.log('token in refresh', res.data)
             return setToken(res.data.accessToken)
 
-        //     setTimeout(() => {
-        //         refreshToken()
-        //     }, 10 * 60 * 1000) 
         } catch (error) {
             console.log('error refresh global state', error)
         }
@@ -33,7 +30,7 @@ export const DataProvider = ({ children }) => {
     }, [])
 
     ProductAPI()
-
+   // console.log('Product Api in global state', ProductAPI())
     const state = {
         token: [token, setToken],
         productsApi: ProductAPI(),
