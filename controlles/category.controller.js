@@ -1,5 +1,5 @@
 import { Category } from "../models/categoryModel.js";
-import { Producs } from "../models/productModel.js";
+import { Products } from "../models/productModel.js";
 
 export class CategoryController {
 
