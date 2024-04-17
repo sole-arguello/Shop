@@ -10,6 +10,7 @@ import NotFound from "./utils/NotFound"
 import DetailProduct from './products/detailProduct/DetailProduct';
 import Categories from './categories/Categories';
 import CreateProduct from './createproduct/CreateProduct';
+import Payment from './payment/Payment';
 
 function Pages() {
   const state = useContext(GlobalContext)
@@ -26,6 +27,7 @@ function Pages() {
     <Route path='/edit_product/:id' element={isLogged ? <CreateProduct /> : <NotFound />} />
     <Route path="/cart" element={<Cart />} />
     <Route path="/detail/:id" element={<DetailProduct />} />
+    <Route path="/payment" element={isLogged ? <Payment /> : <NotFound />} />
 
     <Route path="*" element={<NotFound />} />
   </Routes>
