@@ -1,22 +1,20 @@
 import { Link } from "react-router-dom"
 import { GlobalContext } from "../../../context/GlobalState"
 import { useContext, useEffect, useState } from "react"
-import './Cart.css'
 import axios  from "axios"
-
+import './Cart.css'
 function Cart() {
-//res.data.user.cart
   const state = useContext(GlobalContext)
-  console.log("estado cart", state)
   const { cart, setCart } = state.userApi
-  console.log("cart component", cart)
-
   const [total, setTotal] = useState(0)
-  console.log(setTotal)
-  const { token } = state.token 
-  console.log('token cart', token)
+  const token = state.token 
+  
 
+  //console.log("estado cart", state)
+  //console.log("cart component", cart)
+  //console.log(setTotal)
   //calcula el total del carrito
+  console.log('token cart', token)
   useEffect(() => {
     const getTotal = () => {
       const total = cart.reduce((prev, item) => {
@@ -35,7 +33,6 @@ function Cart() {
     })
   }
   
-  //incrementar
   const increment = (id) => {
      cart.forEach(item => {
        if(item._id === id){
@@ -55,7 +52,7 @@ function Cart() {
     setCart([...cart])
     addToCart()
   }
-  //remover del carrito
+  
   const removeItem = (id) => {
     if(window.confirm("Do you want to delete this product?")){
       cart.forEach((item, index) => {
@@ -110,7 +107,7 @@ function Cart() {
       <div className="total">
         <div className="totalCart">
           <h4>Total: <span>$ {total}</span></h4>
-          <Link to="#">Payment</Link>
+          <Link to="/payment">Payment</Link>
           </div>
       </div>
     </div>
