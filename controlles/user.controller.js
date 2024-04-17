@@ -93,11 +93,11 @@ export class UserController {
     static getUser = async(req, res) => {
         try {
             const user = await User.findById(req.user.id).select('-password')
-            console.log('user get', user)
+            //console.log('user get', user)
             if(!user) return res.status(400).json({message: 'User does not exist'})
             return res.status(200).json({user})
         } catch (error) {
-            console.log("error getUser", error)
+            //console.log("error getUser", error)
             return res.status(500).json({ message: error.message });
         }
     }
@@ -112,7 +112,7 @@ export class UserController {
 
             return res.status(200).json({message: 'Added to cart'})
         } catch (error) {
-            console.log("error addCart", error)
+            //console.log("error addCart", error)
             return res.status(500).json({ message: error.message });
         }
     }
@@ -128,7 +128,7 @@ export class UserController {
 
             return res.status(200).json({ message: 'Cart cleared successfully' });
         } catch (error) {
-            console.log("error clearCart", error);
+            //console.log("error clearCart", error);
             return res.status(500).json({ message: error.message });
         }
     }

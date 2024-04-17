@@ -6,9 +6,10 @@ export class CategoryController {
     static async getCategories(req, res) {
        try {
             const categories = await Category.find();
-            console.log(categories)
+           // console.log(categories)
             res.status(200).json({ categories });
        } catch (error) {
+            //console.log('error get categories', error.message)
             return res.status(500).json({ message: error.message });
        }
     }
@@ -23,10 +24,11 @@ export class CategoryController {
             
             //sino existe la creo
             const newCategory = new Category({ name });
-            console.log('categoria recibida',newCategory)
+            //console.log('categoria recibida',newCategory)
             await newCategory.save();
             return res.status(200).json({message: 'Created category sucessfully' });
         } catch (error) {
+            //console.log('error create category', error.message)
             return res.status(500).json({ message: error.message });
         }
     }
@@ -39,6 +41,7 @@ export class CategoryController {
             await Category.findByIdAndDelete(id);
             return res.status(200).json({ message: 'category Deleted sucessfully' });
         } catch (error) {
+            //console.log('error delete category', error.message)
             return res.status(500).json({ message: error.message });
         }
     }
@@ -50,6 +53,7 @@ export class CategoryController {
             await Category.findOneAndUpdate({ _id: id }, { name });
             return res.status(200).json({ message: 'category Updated sucessfully' });
         } catch (error) {
+            //console.log('error update category', error.message)
             return res.status(500).json({ message: error.message });
         }
     }
