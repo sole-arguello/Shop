@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { GlobalContext } from '../../../../context/GlobalState';
 import ProductItem from '../../utils/Product_Item/ProductItem';
 
@@ -7,10 +7,12 @@ import './DetailProduct.css';
 
 function DetailProduct() {
   const { id } = useParams(); // Obtenemos el id del producto de los parámetros de la URL
-  //console.log("idParams", id);
-  const { productsApi } = useContext(GlobalContext); // Accedemos al contexto para obtener los productos
-  const { products } = productsApi;
+  const state = useContext(GlobalContext); // Accedemos al contexto para obtener los productos
+  const { products, addCart } = state.productsApi;
   const [detailProduct, setDetailProduct] = useState(null);
+  const navigate = useNavigate();
+
+  //console.log("idParams", id);
 
   useEffect(() => {
     const product = products.find(product => product._id === id);
@@ -19,6 +21,18 @@ function DetailProduct() {
   //console.log("detailProduct", detailProduct)
   if (!detailProduct) return <div>Producto no encontrado</div>; // Manejar el caso en que el producto no se encuentre
 
+  
+  const handleBuyNow = async () => {
+    try {
+      // Agregar el producto al carrito
+      await addCart(detailProduct);
+
+      // Redirigir al usuario al carrito
+      navigate('/cart');
+    } catch (error) {
+      console.error('Error al agregar el producto al carrito:', error);
+    }
+  };
   return (
     <>
         <div className='detail'>
@@ -38,7 +52,7 @@ function DetailProduct() {
                     {detailProduct.description}
                 </p>
                 <p>SOLD: {detailProduct.sold}</p>
-                <Link to='/cart' className='cart'>BUY NOW</Link>
+                <button className='cart' onClick={handleBuyNow}>BUY NOW</button>
             </div>
         </div>
 
