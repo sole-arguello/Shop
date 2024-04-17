@@ -1,43 +1,17 @@
 import { GlobalContext } from '../../../../context/GlobalState'
 import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
-import './ProductItem.css'
 import Loading from '../Loading/Loading'
-import Products from '../../products/Products'
+import './ProductItem.css'
 
-
-function ProductItem({product, products, setProducts, isAdmin, callback, setCallback, deleteProduct}) {
+function ProductItem({product, products, setProducts, isAdmin, deleteProduct}) {
 
   const state = useContext(GlobalContext)
   const { addCart } = state.userApi
-  const token = state.token[0]
-  const [ loading, setLoading ] = useState(false)
+
+  const [ loading ] = useState(false)
     //console.log('Estado en product item', state)
   //console.log('addCart', addCart)
-
-  // const deleteProduct = async() => {
-
-  //   try {
-  //     setLoading(true)
-  //     const destroyImg = axios.post(`/api/products`, 
-  //     {public_id: product.images.public_id},
-  //     {headers: { Authorization: token}},
-  //     )
-
-  //     const deleteProduct = axios.delete(`/api/products/${product._id}`, 
-  //     {headers: { Authorization: token}}
-  //     )
-
-  //     await destroyImg
-  //     await deleteProduct
-  //     setLoading(false)
-  //     setCallback(!callback)
-  //   } catch (error) {
-  //     console.log('Error en delete product', error.response.data.message)
-  //     alert(error.response.data.message)
-  //   }
-  // }
 
   const handleCheck = async(id) => {
     products.forEach(product => {
@@ -46,12 +20,6 @@ function ProductItem({product, products, setProducts, isAdmin, callback, setCall
     setProducts([...products])
   }
 
-  // const handleCheck = async (id) => {
-  //   const updatedProducts = products.map((product) =>
-  //     product._id === id ? { ...product, checked: !product.checked } : product
-  //   );
-  //   setProducts(updatedProducts);
-  // };
 
   if(loading) return <div className='product_card'><Loading/></div> 
 

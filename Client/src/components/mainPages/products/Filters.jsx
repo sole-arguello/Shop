@@ -4,14 +4,13 @@ import './Filters.css'
 
 function Filters() {
     const state = useContext(GlobalContext)
-    const { products, setProducts, callback, setCallback,
-         category, setCategory, sort, setSort, search, setSearch, 
-         page, setPage, result, setResult} = state.productsApi
+    const {   callback, setCallback, category, setCategory, sort,
+         setSort, search, setSearch} = state.productsApi
     
     const {categories} = state.categoriesApi
 
     const handleCategory = (e) => {
-       // setCallback(!callback)
+        setCallback(!callback)
         setCategory(e.target.value)
     }
   return (
@@ -21,9 +20,6 @@ function Filters() {
             <select  name="category" value={category} onChange={handleCategory}>
                 <option value="">All Products</option>
                 {
-                    // products.map(product => (
-                    //     <option key={product._id} value={product._id} >{product.category}</option>
-                    // ))
                     categories.map(category => (
                         <option value={"category=" + category._id} key={category._id}>
                             {category.name}

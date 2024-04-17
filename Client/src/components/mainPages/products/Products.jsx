@@ -12,10 +12,9 @@ function Products() {
     const state = useContext(GlobalContext);
     const { products, setProducts, callback, setCallback } = state.productsApi;
     const { isAdmin } = state.userApi
-    //const { addCart } = state.userApi
     const [ isChecked, setIsChecked ] = useState(false)
     const token = state.token[0]
-    const [ loading, setLoading ] = useState(false)
+    const [ setLoading ] = useState(false)
 
     
 
@@ -61,12 +60,6 @@ function Products() {
         })
         
     }
-    // const deleteAll = () => {
-    //     products.forEach(product => {
-    //         if(product.checked) product.checked = false
-    //     })
-    //     setProducts([...products])
-    // }
    
     return (
         <>
@@ -76,7 +69,9 @@ function Products() {
                 <span style={{textTransform: 'uppercase', color: 'blue', letterSpacing: '1.3px' }}>Select All</span>
                 <input type="checkbox" checked={isChecked} onChange={checkAll} 
                 style={{height: '25px', width: '25px', transform: 'translateX(5px)', margin: '0 15px' }}/>
-                <button onClick={deleteAll} style={{ border: '1px solid crimson ', padding: '10px 25px', color:'crimson', textTransform: 'uppercase'}}>Delete all</button>    
+                <button onClick={deleteAll} 
+                style={{ border: '1px solid crimson ', padding: '10px 25px', 
+                color:'crimson', textTransform: 'uppercase'}}>Delete all</button>    
             </div>
         }
             <div className='products'>
