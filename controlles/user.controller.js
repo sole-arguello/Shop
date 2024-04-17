@@ -116,6 +116,23 @@ export class UserController {
             return res.status(500).json({ message: error.message });
         }
     }
+
+    static clearCart = async (req, res) => {
+        try {
+            const user = await User.findById(req.user.id);
+            if (!user) return res.status(400).json({ message: 'User does not exist' });
+
+            // Actualizar el carrito del usuario para que esté vacío
+            user.cart = [];
+            await user.save();
+
+            return res.status(200).json({ message: 'Cart cleared successfully' });
+        } catch (error) {
+            console.log("error clearCart", error);
+            return res.status(500).json({ message: error.message });
+        }
+    }
+
     
 }
 

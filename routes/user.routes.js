@@ -21,6 +21,8 @@ router.get('/infor', auth, UserController.getUser );//perfil
 
 router.patch('/addcart', auth, UserController.addCart );
 
+router.patch('/clearCart', auth, UserController.clearCart );
+
 export { router as userRouter }
 
 

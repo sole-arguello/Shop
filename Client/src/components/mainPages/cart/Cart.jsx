@@ -26,11 +26,23 @@ function Cart() {
   }, [cart])
 
   const addToCart = async () => {
-    await axios.patch('/api/user/addCart', {cart}, {
-      headers: {
-        Authorization: token
-      }
-    })
+    try {
+      await axios.patch('/api/user/addCart', {cart}, {
+        headers: {
+          Authorization: token
+        }
+      })
+
+      await axios.patch('/api/user/clearCart', {}, {
+        headers: {
+          Authorization: token
+        }
+      });
+      //actualizar el carrito
+      // setCart(cart.map(item => item._id === cart[cart.length-1]._id ? item : item))
+    } catch (error) {
+      console.log('Error en add to cart', error.response.data.message)
+    }
   }
   
   const increment = (id) => {
@@ -64,6 +76,19 @@ function Cart() {
       addToCart()
     }
   }
+
+  const clearCart = () => {
+    if (window.confirm("¿Seguro que deseas vaciar el carrito?")) {
+      setCart([]); // Vaciar el carrito
+      // Actualizar el carrito en el backend (opcional)
+      axios.patch('/api/user/clearCart', {}, {
+        headers: {
+          Authorization: token
+        }
+      })
+    }
+  };
+  
 
   if(cart.length === 0) 
     return (<h2 style={{textAlign: 'center', fontSize:'5rem'}}>Cart Empty</h2>)
@@ -107,6 +132,8 @@ function Cart() {
       <div className="total">
         <div className="totalCart">
           <h4>Total: <span>$ {total}</span></h4>
+          <button onClick={clearCart}>Vaciar Carrito</button>
+
           <Link to="/payment">Payment</Link>
           </div>
       </div>
