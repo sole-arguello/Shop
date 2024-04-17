@@ -83,9 +83,15 @@ function Cart() {
                 <div className='box-detail'>
                   
                   <h2>{product.title}</h2>
-                  <span>${product.price * product.quantity}</span>
-                  <p>{product.content}</p>
-                  <p>{product.description}</p>
+                  <h5>${product.price * product.quantity}</h5>
+                  <p>
+                    <h4 style={{textDecoration: 'underline', color: 'whitesmoke'}}>Content: </h4>
+                    {product.content}
+                  </p>
+                  <p>
+                    <h4 style={{textDecoration: 'underline', color: 'whitesmoke'}}>Description: </h4>
+                    {product.description}
+                  </p>
                   <div className="amount">
                     <button onClick={() => decrement(product._id)}> - </button>
                     <span>{product.quantity}</span>
@@ -102,8 +108,10 @@ function Cart() {
         })
       }
       <div className="total">
-        <h4>Total: $ {total}</h4>
-        <Link to="#">Payment</Link>
+        <div className="totalCart">
+          <h4>Total: <span>$ {total}</span></h4>
+          <Link to="#">Payment</Link>
+          </div>
       </div>
     </div>
   )

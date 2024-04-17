@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { GlobalContext } from "../../context/GlobalState"
 import Menu from "./icons/bar.svg"
 import Cart from "./icons/cart.svg"
@@ -8,12 +8,13 @@ import { Link } from "react-router-dom"
 import axios from 'axios'
 function Header() {
     const state = useContext(GlobalContext)
+    const { isLogged, setIslogged, isAdmin, setIsAdmin, cart } = state.userApi
+    const [ menu, setMenu ] = useState(false)
+
     //console.log('state header', state)
-    const { isLogged, setIslogged, isAdmin, setIsAdmin } = state.userApi
-    console.log('isLogged', state.userApi.isLogged)
-    console.log('isAdmin', state.userApi.isAdmin)
-    const { cart } = state.userApi
     //console.log('cart in header', cart)
+   // console.log('isLogged', state.userApi.isLogged)
+    //console.log('isAdmin', state.userApi.isAdmin)
     const adminRouter = () =>{
         return (
             <>
@@ -30,17 +31,26 @@ function Header() {
         setIsAdmin(false)
     }
     const loggedRouter = () =>{
+        
         return (
             <>
                 <li><Link to="/history">History</Link></li>
-                <li><Link to="/" onClick={loggedOut}>Logout</Link></li>
+                <li><Link to="/" onClick={loggedOut()}>Logout</Link></li>
             </>
            )
     }
 
+    const toggleMenu = () =>{
+        setMenu(!menu)
+    }
+
+    const styleMenu ={
+        left: menu ? 0 : '-100%'
+    }
+
 return (
     <header>
-        <div className="menu">
+        <div className="menu" onClick={toggleMenu}>
             
             <img src={Menu} alt="menu" width={30}/>
         </div>
@@ -50,11 +60,12 @@ return (
             </h1>
         </div>
 
-        <ul>
+        <ul style={styleMenu}>
             <li><Link to="/">{isAdmin ? 'Products' : 'Shop'}</Link></li>
             {isAdmin && adminRouter()}
             {isLogged ? loggedRouter() : <li><Link to="/login">Login & Register</Link></li>}
-            <li>
+
+            <li onClick={toggleMenu}>
                 <img src={Close} alt="close" width={30} className="menu"/>
             </li>
         </ul>

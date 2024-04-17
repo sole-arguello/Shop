@@ -63,7 +63,7 @@ function ProductItem({product, products, setProducts, isAdmin, callback, setCall
         <img src={product.images.url} alt={product.title} />
         <div className="product_box"> 
             <h2>{product.title}</h2>
-            <span>{product.price}</span>
+            <h1>${product.price}</h1>
             <p>{product.description}</p>
         </div>
         <div className="row_btn">

@@ -26,12 +26,18 @@ function DetailProduct() {
             <div className='box-detail'>
                 <div className='row'>
                 <h2>{detailProduct.title}</h2>
-                <h6>{detailProduct.product_id}</h6>
+                <h6>ID: {detailProduct.product_id}</h6>
                 </div>
-                <span>${detailProduct.price}</span>
-                <p>{detailProduct.content}</p>
-                <p>{detailProduct.description}</p>
-                <p>Sold: {detailProduct.sold}</p>
+                <h5>${detailProduct.price}</h5>
+                <p>
+                    <h4 style={{textDecoration: 'underline', color: 'whitesmoke'}}>Content: </h4>
+                    {detailProduct.content}
+                </p>
+                <p>
+                    <h4 style={{textDecoration: 'underline', color: 'whitesmoke'}}>Description: </h4>
+                    {detailProduct.description}
+                </p>
+                <p>SOLD: {detailProduct.sold}</p>
                 <Link to='/cart' className='cart'>BUY NOW</Link>
             </div>
         </div>
